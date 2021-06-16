@@ -1,37 +1,38 @@
 package org.example;
 
 public class BowlingGame {
-    private int[] rolls;
-    private int currRoll=0;
 
     public BowlingGame() {
-        this.rolls = new int[21];
     }
 
-    public void roll(int pins) {
-        rolls[currRoll++] =pins;
-    }
-    public int getScore() {
+    public int[] getScore(int[] rolls) {
         int score = 0;
-        int rollInex=0;
-        //frame loop
-        for (int i = 0; i < 10; i++) {
-            //that means strike
-            if(rolls[rollInex] ==10) {
-                score+=rolls[rollInex]+rolls[rollInex+1] + rolls[rollInex+2];
-                rollInex++;
-                System.out.println(" score" + " = " +  score);
-                //that means spare
-            }else if(rolls[rollInex]+rolls[rollInex+1]==10){
-                score+=rolls[rollInex]+rolls[rollInex+1] + rolls[rollInex+2];
-                rollInex+=2;
-            }else {
-                score+=rolls[rollInex]+rolls[rollInex+1] ;
-                rollInex+=2;
-            }
+        int[] scores = new int[10];
+        int rollIndex = 0;
+        int scoreIndex=0;
+        //input
+        //1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6
+        //output
+        //5, 14, 29, 49, 60, 61, 77, 97, 117, 133
 
+        while (rollIndex < rolls.length-2){
+
+            if (rolls[rollIndex] == 10) {
+                score += rolls[rollIndex] + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+                rollIndex++;
+
+                System.out.println(" score" + " = " + score);
+                //that means spare
+            } else if (rolls[rollIndex] + rolls[rollIndex + 1] == 10) {
+                score += rolls[rollIndex] + rolls[rollIndex + 1] + rolls[rollIndex + 2];
+                rollIndex += 2;
+            } else {
+                score += rolls[rollIndex] + rolls[rollIndex + 1];
+                rollIndex += 2;
+            }
+            scores[scoreIndex++] = score;
         }
-         return score;
+        return scores;
     }
 
 

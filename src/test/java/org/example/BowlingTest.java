@@ -1,65 +1,38 @@
 package org.example;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit test for simple App.
  */
-public class BowlingTest
-
-{
+public class BowlingTest {
     /**
      * Rigorous Test :-)
      */
     BowlingGame bowlingGame;
+
     @Before
-    public void starter()
-    {
+    public void starter() {
         bowlingGame = new BowlingGame();
     }
 
     @Test
-    public void rollsTest()
-    {
-        bowlingGame = new BowlingGame();
-            roller(0,20);
-        assertEquals(0,bowlingGame.getScore());
+    public void InputTest() {
+        int [] l = {1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6};
+        assertEquals(5, bowlingGame.getScore(l)[0]);
+    }
+    @Test
+    public void  OutputTest() {
+        int [] l = {1,4,4,5,6,4,5,5,10,0,1,7,3,6,4,10,2,8,6};
+        String out =  "[5, 14, 29, 49, 60, 61, 77, 97, 117, 133]";
+        String returnedOutPut = Arrays.toString(bowlingGame.getScore(l));
+        assertEquals(out, returnedOutPut);
     }
 
-    @Test
-    public void rollAllTest()
-    {
-         bowlingGame = new BowlingGame();
-            roller(1,20);
-        assertEquals(20,bowlingGame.getScore());
-    }
 
-    @Test
-    public void spareTest()
-    {
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(3);
-        roller(0,17);
-        assertEquals(16,bowlingGame.getScore());
-    }
-    @Test
-    public void strikeTest()
-    {
-        bowlingGame.roll(10);
-        bowlingGame.roll(4);
-        bowlingGame.roll(3);
-        roller(0,16);
-        assertEquals(24,bowlingGame.getScore());
-    }
-    public void roller( int pins, int rolls)
-    {
-        for (int i = 0; i <rolls ; i++) {
-            bowlingGame.roll(pins);
-        }
-    }
 }
